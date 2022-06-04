@@ -1,0 +1,12 @@
+{% extends 'base.html' %} {% block content %} {% load crispy_forms_tags %}
+
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <img src="{{request.profile_pic}}" alt="{{request.user}}_profile_pic">
+        <h3>{{request.user}}</h3>
+        
+
+        
+    </div>
+</div>
+{% endblock content %}

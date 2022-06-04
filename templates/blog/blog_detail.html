@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="col">
+        <div class="card h-100 w-100">
+            <img src="" class="card-img-top" alt="{{post.title}}_image">
+            <div class="card-body">
+                <h5 class="card-title">{{post.title}}</h5>
+                <p class="card-text">{{post.content}}</p>
+            </div>
+            <div class="card-body">
+                <i class="bi bi-chat-left-text"></i><span>0</span>
+                <i class="bi bi-eye"></i><span>0</span>
+                <i class="bi bi-heart"></i><span>0</span>
+            </div>
+            
+            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+        </div>
+    </div>
+  </div>
+    <br>
+    <a href="{% url 'update' post.id %}"><button>Update</button></a>
+    <a href="{% url 'delete' post.id %}"><button>Delete</button></a>
+{% endblock content %}

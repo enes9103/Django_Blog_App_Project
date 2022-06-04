@@ -1,0 +1,175 @@
+{% extends 'base.html' %}
+{% block content %} {% load static %}
+
+<link rel="stylesheet" href="{% static 'blog/blog.css' %}" />
+
+<style>
+    /* BLOG LIST */
+    @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap");
+    
+    body {
+      font-family: "Quicksand", sans-serif;
+      place-items: center;
+      background: #7f7fd5;
+      background: linear-gradient(to right, #91eae4, #86a8e7, #7f7fd5);
+    }
+    
+    .container {
+      display: flex;
+      /* flex-direction: column; */
+    /* justify-content: space-; */
+      flex-wrap: wrap;
+      /* justify-content: center; */
+      max-width: 1200px;
+      max-height: 15rem;
+      margin: 2rem;
+      gap: 3rem;
+    }
+    
+    .card__image {
+      max-width: 100%;
+      height: 20rem;
+      background-size: cover;
+      background-position: center;
+      transition: -webkit-transform 0.2s;
+      transition: transform 0.2s;
+      transition: transform 0.2s, -webkit-transform 0.2s;
+    }
+    
+    .card {
+      display: flex;
+      flex-direction: column;
+      width: clamp(20rem, calc(20rem + 2vw), 22rem);
+      min-width: 30%;
+      overflow: hidden;
+      box-shadow: 0 .1rem 1rem rgba(0, 0, 0, 0.1);
+      border-radius: 1em;
+      background: #ECE9E6;
+    background: linear-gradient(to right, #FFFFFF, #ECE9E6);
+    
+    }
+    
+    .card__body {
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+    }
+    
+    
+    .tag {
+      align-self: flex-start;
+      padding: .25em .75em;
+      border-radius: 1em;
+      font-size: .75rem;
+    }
+    
+    .tag + .tag {
+      margin-left: .5em;
+    }
+    
+    .tag-blue {
+      background: #56CCF2;
+    background: linear-gradient(to bottom, #2F80ED, #56CCF2);
+      color: #fafafa;
+    }
+    
+    .tag-brown {
+      background: #D1913C;
+    background: linear-gradient(to bottom, #FFD194, #D1913C);
+      color: #fafafa;
+    }
+    
+    .tag-red {
+      background: #cb2d3e;
+    background: linear-gradient(to bottom, #ef473a, #cb2d3e);
+      color: #fafafa;
+    }
+    
+    .card__body h4 {
+      font-size: 1.5rem;
+      text-transform: capitalize;
+    }
+    
+    .card__footer {
+      display: flex;
+      padding: 1rem;
+      margin-top: auto;
+    }
+    
+    .user {
+      display: flex;
+      gap: .5rem;
+    }
+    
+    .user__image {
+      border-radius: 50%;
+    }
+    
+    .user__info > small {
+      color: #666;
+    }
+    
+    
+    .readmore {
+      color: #75D13B;
+      margin-bottom: 10px;
+      float: right;
+    }
+    .readmore:after {
+      transition: all 0.3s ease;
+      -webkit-transition: all 0.3s ease;
+      content: "\f061";
+      font-family: FontAwesome;
+      margin-left: -10px;
+      opacity: 0;
+      vertical-align: middle;
+    }
+    .readmore:hover:after {
+      margin-left: 5px;
+      opacity: 1;
+    }
+    
+    .pagination{
+     position: relative;
+     bottom: 0%;
+    }
+</style>
+
+
+<div class="container">
+  {% for post in posts %}
+  <div class="card">
+    <div class="card__header">
+      <img
+        src="{{ post.image.url }}"
+        alt="card__image"
+        class="card__image"
+        width="600"
+      />
+    </div>
+    <div class="card__body">
+      <span class="tag tag-blue">{{ post.category }}</span>
+      <h4>{{post.title}}</h4>
+      <p>{{ post.content }}</p>
+      <div>
+        <span><i class="bi bi-heart"></i></span> <small>1</small>
+        <span><i class="bi bi-chat-left-text"></i></i></span> <small>1</small>
+        <span><i class="bi bi-eye"></i></span> <small>1</small>
+      </div>
+    </div>
+    <div class="card__footer">
+      <div class="user">
+        <img src="" alt="user__image" class="user__image" />
+        <div class="user__info">
+          <h5>Jane Doe</h5>
+          <small>{{ post.date }}</small>
+        </div>
+      </div>
+      <a href="{% url 'detail' post.id %}" class="readmore">Read More</a>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+{% endblock content %}

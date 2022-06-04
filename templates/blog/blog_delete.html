@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+    <form action="" method="POST">
+
+        <p>Are You Sure delete {{post}}!</p>
+        {% csrf_token %}
+
+        <input type="submit" value="Yes">
+
+    </form>
+
+    <br>
+
+    <a href="{% url 'home' %}">
+        <button>No</button>
+    </a>
+{% endblock content %}
