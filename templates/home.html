@@ -1,14 +1,15 @@
 {% extends 'base.html' %}
-{% block content %} {% load static %}
+{% block content %}
+{% load static %}
 
-<link rel="stylesheet" href="{% static 'blog/blog.css' %}" />
+<link rel="stylesheet" href="{% static 'blog/style.css' %}" />
 
 <div class="container">
   {% for post in posts %}
   <div class="card">
     <div class="card__header">
       <img
-        src="{{ post.image.url }}"
+        src="{{ post.post_image }}"
         alt="card__image"
         class="card__image"
         width="600"
@@ -29,7 +30,7 @@
         <img src="" alt="user__image" class="user__image" />
         <div class="user__info">
           <h5>Jane Doe</h5>
-          <small>{{ post.date }}</small>
+          <small>{{ post.publish_date }}</small>
         </div>
       </div>
       <a href="{% url 'detail' post.id %}" class="readmore">Read More</a>

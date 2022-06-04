@@ -55,5 +55,8 @@ def user_logout(request):
 # -----PROFİLE---------
 def profile(request,id):
     user=UserProfile.objects.get(id=id)
-
-    return render(request,'users/profile.html')
+    context={
+        "user":user
+    }
+    
+    return render(request,'users/profile.html', context)

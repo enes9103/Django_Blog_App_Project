@@ -4,14 +4,13 @@ from .models import Post
 from django.contrib.auth.decorators import login_required
 
 # ---------HOME----------
-def home(request):
+def home(request):                              #?????????????????????????
     posts=Post.objects.all()
     context={'posts':posts}
 
     return render(request, 'home.html',context)
 
 # ---------ADD----------
-@login_required
 def post_add(request):
     form = PostForm(request.POST)
     
@@ -29,7 +28,6 @@ def post_add(request):
     return render(request, "blog/blog_add.html",context)
 
 # ---------UPDATE----------
-@login_required
 def blog_update(request, id):
     post = Post.objects.get(id=id)
     form = PostForm(instance=post)
@@ -46,7 +44,6 @@ def blog_update(request, id):
     return render(request, "blog/blog_update.html", context)
 
 # ---------DELETE----------
-@login_required
 def blog_delete(request, id):
     post = Post.objects.get(id=id)
     
@@ -61,7 +58,6 @@ def blog_delete(request, id):
     return render(request, "blog/blog_delete.html", context)
 
 # ---------DETAİL----------
-@login_required
 def blog_detail(request, id):        
     post = Post.objects.get(id=id)
     context = {
