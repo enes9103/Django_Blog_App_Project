@@ -2,34 +2,37 @@
 {% block content %}
 {% load static %}
 
-<link rel="stylesheet" href="{% static 'blog/style.css' %}" />
-
 <div class="container">
   {% for post in posts %}
   <div class="card">
     <div class="card__header">
-      <img
-        src="{{ post.post_image }}"
+      
+      {% comment %}
+      <!-- <img
+        src="{{ post.post_image.url }}"
         alt="card__image"
         class="card__image"
         width="600"
-      />
+      /> -->        
+      {% endcomment %}
+        
+
     </div>
     <div class="card__body">
       <span class="tag tag-blue">{{ post.category }}</span>
       <h4>{{post.title}}</h4>
       <p>{{ post.content }}</p>
       <div>
-        <span><i class="bi bi-heart"></i></span> <small>1</small>
-        <span><i class="bi bi-chat-left-text"></i></i></span> <small>1</small>
-        <span><i class="bi bi-eye"></i></span> <small>1</small>
+        <span><i class="bi bi-heart"></i></span> <small>{{post.blog_like}}</small>
+        <span><i class="bi bi-chat-left-text"></i></i></span> <small>{{post.blog_comment}}</small>
+        <span><i class="bi bi-eye"></i></span> <small>{{post.blog_views}}</small>
       </div>
     </div>
     <div class="card__footer">
       <div class="user">
-        <img src="" alt="user__image" class="user__image" />
+        <img src="{{ post.post_image }}" alt="post_image" class="post_image" />
         <div class="user__info">
-          <h5>Jane Doe</h5>
+          <!-- <span class="user__name">{{ post.author }}</span> -->
           <small>{{ post.publish_date }}</small>
         </div>
       </div>

@@ -10,16 +10,32 @@
                 <p class="card-text">{{post.content}}</p>
             </div>
             <div class="card-body">
-                <i class="bi bi-chat-left-text"></i><span>0</span>
-                <i class="bi bi-eye"></i><span>0</span>
-                <i class="bi bi-heart"></i><span>0</span>
+              <a href="{% url 'blog_like' post.id %}"><i class="bi bi-heart">{{post.blog_like}}</i></a>
+                <i class="bi bi-chat-left-text">{{post.blog_comment}}</i>
+                <i class="bi bi-eye">{{post.blog_views}}</i>
+                
             </div>
-            
+            <div class="comment">
+
+                <p>Add a new comment</p>
+                <form action="" method="post">
+                  {{ comment_form.as_p }}
+                  {% csrf_token %}
+                  <input type="submit" value="Add comment">
+                </form>
+                {% for comment in comments %}
+                <p>
+                  {{ comment.body }}
+                </p>
+                {% endfor %}
+              </div>
             <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
         </div>
     </div>
   </div>
     <br>
+    {% if request.user == post.user %}
     <a href="{% url 'update' post.id %}"><button>Update</button></a>
     <a href="{% url 'delete' post.id %}"><button>Delete</button></a>
+    {% endif %}
 {% endblock content %}
