@@ -1,35 +1,40 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="row row-cols-1 row-cols-md-3 g-4">
-    <div class="col">
-        <div class="card h-100 w-100">
-            <img src="" class="card-img-top" alt="{{post.title}}_image">
-            <div class="card-body">
-                <h5 class="card-title">{{post.title}}</h5>
-                <p class="card-text">{{post.content}}</p>
+<div class="container">
+<div class="card mx-auto border-secondary p-1 shadow" style="width: 400px;" >
+  <div class="card-body text-center">
+            <img src="{{ post.image }}" class="card-img-top" alt="{{ post.title }}_image">
+            <div class=" mb-auto">
+                <h5 class="card-title">{{ post.title }}</h5>
+                <p class="card-text">{{ post.content }}</p>
+                <h6 class="card-title">{{ post.category }}</h6>
             </div>
             <div class="card-body">
-              <a href="{% url 'blog_like' post.id %}"><i class="bi bi-heart">{{post.blog_like}}</i></a>
-                <i class="bi bi-chat-left-text">{{post.blog_comment}}</i>
-                <i class="bi bi-eye">{{post.blog_views}}</i>
-                
+              <a href="{% url 'blog_like' post.id %}"><i class="bi bi-heart p-1">{{ post.blog_like }}</i></a>
+                <i class="bi bi-chat-left-text p-2">{{post.blog_comment}}</i>
+                <i class="bi bi-eye p-1">{{ post.blog_views }}</i>
             </div>
+            <br>
             <div class="comment">
-
-                <p>Add a new comment</p>
                 <form action="" method="post">
                   {{ comment_form.as_p }}
                   {% csrf_token %}
-                  <input type="submit" value="Add comment">
+                  <input type="submit" value="Add Comment">
                 </form>
+                <hr>
+                <h5>Comments :</h5>
+                <hr>
                 {% for comment in comments %}
-                <p>
+                <p style="text-align:left; margin-left:10px;">
+                  <b>{{ comment.user }} :</b>
                   {{ comment.body }}
+                  <span style="font-size: 12px; float: right; margin-right: 5px;">{{ comment.date_added }}</span>
+                  
                 </p>
                 {% endfor %}
               </div>
-            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+            <p class="card-text" style="margin:20px" ><small class="text-muted">Last updated 3 mins ago</small></p>
         </div>
     </div>
   </div>
@@ -38,4 +43,5 @@
     <a href="{% url 'update' post.id %}"><button>Update</button></a>
     <a href="{% url 'delete' post.id %}"><button>Delete</button></a>
     {% endif %}
+  </div>
 {% endblock content %}

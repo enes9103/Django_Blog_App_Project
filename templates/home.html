@@ -3,43 +3,41 @@
 {% load static %}
 
 <div class="container">
+  <div class="row">
   {% for post in posts %}
-  <div class="card">
-    <div class="card__header">
+  <div class="col g-3">
+    <div class="card h-100 border-secondary p-1 shadow" style="width: 400px">
+      <div class="card-body text-center" style="width: 400px">
       
-      {% comment %}
-      <!-- <img
-        src="{{ post.post_image.url }}"
+      <img
+        src="{{ post.post_image }}"
         alt="card__image"
         class="card__image"
         width="600"
-      /> -->        
-      {% endcomment %}
+      />     
         
-
-    </div>
-    <div class="card__body">
-      <span class="tag tag-blue">{{ post.category }}</span>
-      <h4>{{post.title}}</h4>
-      <p>{{ post.content }}</p>
+      <div class="card-body mb-auto">
+      <span class="card-title">{{ post.category }}</span>
+      <h4 class="card-title">{{post.title}}</h4>
+      <p class="card-text">{{ post.content }}</p>
       <div>
-        <span><i class="bi bi-heart"></i></span> <small>{{post.blog_like}}</small>
-        <span><i class="bi bi-chat-left-text"></i></i></span> <small>{{post.blog_comment}}</small>
-        <span><i class="bi bi-eye"></i></span> <small>{{post.blog_views}}</small>
+        <span><i class="bi bi-heart" style="margin: 2px"></i></span> <small>{{post.blog_like}}</small>
+        <span><i class="bi bi-chat-left-text" style="margin: 2px"></i></i></span> <small>{{post.blog_comment}}</small>
+        <span><i class="bi bi-eye" style="margin: 2px"></i></span> <small>{{post.blog_views}}</small>
       </div>
     </div>
-    <div class="card__footer">
-      <div class="user">
-        <img src="{{ post.post_image }}" alt="post_image" class="post_image" />
+    <div class="card-body mb-auto">
         <div class="user__info">
-          <!-- <span class="user__name">{{ post.author }}</span> -->
+          <span class="card-text">{{ post.user }}</span>
           <small>{{ post.publish_date }}</small>
         </div>
       </div>
       <a href="{% url 'detail' post.id %}" class="readmore">Read More</a>
     </div>
   </div>
+  </div>
   {% endfor %}
+</div>
 </div>
 
 {% endblock content %}

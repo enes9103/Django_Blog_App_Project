@@ -1,12 +1,20 @@
 {% extends 'base.html' %} {% block content %} {% load crispy_forms_tags %}
 
-<div class="row">
-    <div class="col-md-6 offset-md-3">
-        <img src="{{request.profile_pic}}" alt="{{request.user}}_profile_pic">
-        <h3>{{request.user}}</h3>
-        
-
-        
+<div class="container">
+    <div
+    class="card mx-auto h-100 border-secondary p-1 shadow"
+    style="width: 400px"
+    >
+    <h2 style='margin:5px'>Update Profile</h2>
+    <div class="card-body m-4">
+      <img src="{{user.profile_pic}}" alt="{{user}}_avatar">
+      <form action="" method="POST">
+        {% csrf_token %} 
+        {{user_form.as_p}}
+        {{form.as_p}}
+        <input type="submit" value="update" />
+      </form>
     </div>
+  </div>
 </div>
 {% endblock content %}

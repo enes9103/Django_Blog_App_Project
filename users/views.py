@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout, login
 from django.contrib import messages
-from .forms import UserForm, UserProfileForm
+from .forms import UpdateProfileForm, UpdateUserForm, UserForm, UserProfileForm
 from .models import UserProfile
+from django.contrib.auth.models import User
 
 from django.contrib.auth.forms import AuthenticationForm
 
@@ -54,9 +55,23 @@ def user_logout(request):
 
 # -----PROFİLE---------
 def profile(request,id):
-    user=UserProfile.objects.get(id=id)
-    context={
-        "user":user
-    }
+    user = User.objects.get(id=id)
+    user_form =  UpdateUserForm(instance=user)
+    form = UpdateProfileForm(instance=user)
+    profile_pic=UserProfile.objects.filter(user=user)
     
-    return render(request,'users/profile.html', context)
+    if request.method == "POST":
+        user_form =  UpdateUserForm(request.POST, instance=user)
+        
+        form = UpdateProfileForm(request.POST, instance=user)
+        if form.is_valid():
+            user_form.save()
+            form.save()
+            return redirect("home")
+    
+    context = {
+        "user_form" : user_form,
+        "form" : form,
+        'profile_pic':profile_pic
+    }
+    return render(request, "users/profile.html", context)
