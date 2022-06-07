@@ -1,10 +1,22 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h2>Add Student</h2>
-    <form action="" method="POST">
+
+<div class="container">
+    <div
+    class="card mx-auto h-100 border-secondary p-1 shadow"
+    style="width: 400px"
+    >
+    <h2 style='margin:5px'>Add New Blog</h2>
+    <div class="card-body m-4">
+      <img src="{{user.profile_pic}}" alt="{{user}}_avatar">
+      <form action="" method="POST">
         {% csrf_token %}                   
         {{form.as_p}}						   
         <input type="submit" value="Submit">
-    </form>
+      </form>
+    </div>
+  </div>
+</div>
+
 {% endblock content %}

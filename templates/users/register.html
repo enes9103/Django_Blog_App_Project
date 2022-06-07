@@ -1,21 +1,24 @@
 {% extends 'base.html' %} {% block content %} {% load crispy_forms_tags %}
 
-<h2>Registration Form</h2>
+<div class="container">
+  <div class="card mx-auto h-100 border-secondary p-1 shadow" style="width: 600px">
+    <h2 style='margin:5px'>Registration Form</h2>
+    {% if request.user.is_authenticated %}
+    <h3>Thanks for registering</h3>
+    {% else %}
+    <h3>Fill out the form please!</h3>
+    <div class="card-body m-4">
+      <img src="{{user.profile_pic}}" alt="{{user}}_avatar">
+      <form action="" method="POST">
+        {% csrf_token %}
+        {{ form_user | crispy }}
+        {{ form_profile | crispy }}
+        <button type="submit" class="btn btn-danger">Register</button>
+      </form>
+    </div>
+  </div>
+</div>
 
-{% if request.user.is_authenticated %}
-
-<h3>Thanks for registering</h3>
-
-{% else %}
-
-<h3>Fill out the form please!</h3>
-
-<form action="" method="post" enctype="multipart/form-data">
-  {% csrf_token %}
-  {{ form_user | crispy }}
-  {{ form_profile | crispy }}
-  <button type="submit" class="btn btn-danger">Register</button>
-</form>
 {% endif %}
 
 {% endblock content %}
